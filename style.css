@@ -1,0 +1,41 @@
+*{margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+
+body {
+
+background-color: rgb(8, 27, 12);
+display: flex;
+flex-direction: column; 
+justify-content: center;
+align-items: center;
+height: 100vh;
+overflow: hidden;
+}
+
+canvas {
+border: 1px solid #333; 
+background-image: url('./FUNDO_MANHA.jpeg'); 
+background-size: 100% 100%;
+/* background-repeat: no-repeat;
+background-position: center; */
+
+background-color: rgb(195, 223, 182);
+}
+/* Ajuste da imagem da logo */
+#logo-img {
+    height: 400px; /* Ajuste o tamanho da logo aqui */
+    width: auto;
+}
+#container-logo {
+    position: absolute;
+    top: -60px; /* Distância do topo da tela - ajuste se precisar subir ou descer */
+    left: 50%;
+    transform: translateX(-50%); /* Centraliza perfeitamente na horizontal */
+    z-index: 10; /* Garante que fique na frente de tudo */
+}
+
+
+
