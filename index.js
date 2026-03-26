@@ -9,8 +9,7 @@ let abelha2 = new Abelha(1500, 300, 50, 50, './abelha.png')
 let abelha3 = new Abelha(1700, 500, 50, 50, './abelha.png')
 
 // Itens
-let pocao1 = new Pocao(2000, 325, 40, 40, './pocao1.png')
-let pocao2 = new Pocao(2500, 200, 40, 40, './pocao2.png')
+let pocao = new Pocao(2000, 325, 40, 40, './pocao.png')
 
 // Vida
 let coracao = new Coracao(2000, 325, 40, 40,'./coracao.png')
@@ -38,6 +37,7 @@ function desenhaTexto() {
     des.fillStyle = "green";
     des.fillText("💖: " + fada.vida, 40, 50);
     des.fillText("🏅: " + fada.pontos, 40, 90);
+    des.fillText("FASE: " + fada.fase, 40, 130);
 
     if (!jogar) {
         des.fillStyle = "rgba(0,0,0,0.7)";
@@ -55,8 +55,7 @@ function desenha() {
     abelha1.desenhar()
     abelha2.desenhar()
     abelha3.desenhar()
-    pocao1.desenhar()
-    pocao2.desenhar()
+    pocao.desenhar()
     coracao.desenhar()
     fada.desenhar()
     desenhaTexto()
@@ -64,11 +63,24 @@ function desenha() {
 
 function atualiza() {
     fada.mover()
+
+    //  CONTROLE DE FASE 
+    if (fada.fase == 2) {
+        abelha1.vel = 12
+        abelha2.vel = 12
+        abelha3.vel = 12
+    }
+
+    if (fada.fase == 3) {
+        abelha1.vel = 16
+        abelha2.vel = 16
+        abelha3.vel = 16
+    }
+
     abelha1.mov_obs()
     abelha2.mov_obs()
     abelha3.mov_obs()
-    pocao1.mov_obs()
-    pocao2.mov_obs()
+    pocao.mov_obs()
     coracao.mov_obs()
 }
 
@@ -90,7 +102,7 @@ function colisao() {
 });
 
 // 3. Colisão Poções (Ganha PONTOS ao coletar)
-[pocao1, pocao2].forEach(p => {
+[pocao].forEach(p => {
     if (fada.colid(p)) {
         p.recomeca()
         fada.pontos += 10 // Quantidade de pontos por poção

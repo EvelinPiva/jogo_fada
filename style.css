@@ -6,7 +6,7 @@ box-sizing: border-box;
 
 body {
 
-background-color: rgb(8, 27, 12);
+    background-image: url('./fundo_do_fundo.jpg'); 
 display: flex;
 flex-direction: column; 
 justify-content: center;
