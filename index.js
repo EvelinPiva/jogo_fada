@@ -4,18 +4,19 @@ let des = canvas.getContext('2d')
 let jogar = true; // Controle de estado do jogo
 
 // Obstáculos
-let abelha1 = new Abelha(1300, 100, 50, 50, './abelha.png')
-let abelha2 = new Abelha(1500, 300, 50, 50, './abelha.png')
-let abelha3 = new Abelha(1700, 500, 50, 50, './abelha.png')
+let abelha1 = new Abelha(1300, 100, 50, 50, './img/abelha.png')
+let abelha2 = new Abelha(1500, 300, 50, 50, './img/abelha.png')
+let abelha3 = new Abelha(1700, 500, 50, 50, './img/abelha.png')
 
 // Itens
-let pocao = new Pocao(2000, 325, 40, 40, './pocao.png')
+let pocao = new Pocao(2000, 325, 40, 40, './img/pocao.png')
 
 // Vida
-let coracao = new Coracao(2000, 325, 40, 40,'./coracao.png')
+let coracao = new Coracao(2000, 325, 40, 40,'./img/coracao.png')
 
 // Fada
-let fada = new Fada(200, 325, 120, 90, './fada1.png')
+let fada = new Fada(200, 325, 120, 90, './img/fada1.png')
+let fada2 = new Fada2(100, 225, 90, 90, './img/fada2_2.png')
 
 // CONTROLES
 document.addEventListener('keydown', (e) => {
@@ -25,7 +26,19 @@ document.addEventListener('keydown', (e) => {
     if (tecla === 'a') fada.dir2 = -11
     if (tecla === 'd') fada.dir2 = 11
 })
+document.addEventListener('keydown', (e) => {
+    let tecla = e.key.toLowerCase();
+    if (tecla === 'arrowup') fada2.dir = -9
+    if (tecla === 'arrowdown') fada2.dir = 9
+    if (tecla === 'arrowleft') fada2.dir2 = -11
+    if (tecla === 'arrowright') fada2.dir2 = 11
+})
 
+document.addEventListener('keyup', (e) => {
+    let tecla = e.key.toLowerCase();
+    if (tecla === 'arrowup' || tecla === 'arrowdown') fada2.dir = 0
+    if (tecla === 'arrowleft' || tecla === 'arrowright') fada2.dir2 = 0
+})
 document.addEventListener('keyup', (e) => {
     let tecla = e.key.toLowerCase();
     if (tecla === 'w' || tecla === 's') fada.dir = 0
@@ -58,11 +71,13 @@ function desenha() {
     pocao.desenhar()
     coracao.desenhar()
     fada.desenhar()
+    fada2.desenhar()
     desenhaTexto()
 }
 
 function atualiza() {
     fada.mover()
+    fada2.mover()
 
     //  CONTROLE DE FASE 
     if (fada.fase == 2) {
@@ -70,8 +85,18 @@ function atualiza() {
         abelha2.vel = 12
         abelha3.vel = 12
     }
+    if (fada2.fase == 2) {
+        abelha1.vel = 12
+        abelha2.vel = 12
+        abelha3.vel = 12
+    }
 
     if (fada.fase == 3) {
+        abelha1.vel = 16
+        abelha2.vel = 16
+        abelha3.vel = 16
+    }
+    if (fada2.fase == 3) {
         abelha1.vel = 16
         abelha2.vel = 16
         abelha3.vel = 16
@@ -91,6 +116,10 @@ function colisao() {
             p.recomeca()
             fada.vida -= 1
         }
+        if (fada2.colid(p)) {
+            p.recomeca()
+            fada2.vida -= 1
+        }
     });
 
    // 2. Colisão Corações (Ganha Vida)
@@ -99,6 +128,10 @@ function colisao() {
         p.recomeca()
         fada.vida += 1 
     }
+    if (fada2.colid(p)) {
+        p.recomeca()
+        fada2.vida += 1 
+    }
 });
 
 // 3. Colisão Poções (Ganha PONTOS ao coletar)
@@ -106,6 +139,10 @@ function colisao() {
     if (fada.colid(p)) {
         p.recomeca()
         fada.pontos += 10 // Quantidade de pontos por poção
+    }
+    if (fada2.colid(p)) {
+        p.recomeca()
+        fada2.pontos += 10 // Quantidade de pontos por poção
     }
 });
 }
@@ -117,6 +154,9 @@ function pontuacao() {
 
 function game_over() {
     if (fada.vida <= 0) {
+        jogar = false
+    }
+    if (fada2.vida <= 0) {
         jogar = false
     }
 }
