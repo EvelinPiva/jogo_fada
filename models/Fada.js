@@ -39,14 +39,14 @@ class Fada extends Obj {
     }
     verificaFase() {
         // Se pontos for maior ou igual a 50, muda para fase 2
-        if (this.pontos >= 50 && this.fase == 1) {
+        if (this.pontos >= 40 && this.fase == 1) {
             this.fase = 2;
             // Chamamos a troca de fundo e inimigos aqui para ser imediato
             atualizaCenario(); 
         }
     
         // Exemplo: Se quiseres uma fase 3 com 100 pontos
-        if (this.pontos >= 100 && this.fase == 2) {
+        if (this.pontos >= 90 && this.fase == 2) {
             this.fase = 3;
         }
     }
@@ -124,12 +124,12 @@ class Fada2 extends Obj {
     }
     verificaFase() {
         // Fase 2 aos 50 pontos
-        if (this.pontos >= 50 && this.fase == 1) {
+        if (this.pontos >= 40 && this.fase == 1) {
             this.fase = 2
         }
     
         // Fase 3 aos 120 pontos
-        if (this.pontos >= 120 && this.fase == 2) {
+        if (this.pontos >= 90 && this.fase == 2) {
             this.fase = 3
         }
     }

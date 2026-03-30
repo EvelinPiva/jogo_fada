@@ -4,8 +4,11 @@ let des = canvas.getContext('2d')
 // --- AJUSTE AQUI: Variável única e começando em FALSE para o Enter funcionar ---
 let jogando = false; 
 
+let imgMenu = new Image();
+imgMenu.src = './img/TELA_INICIAL.png';
+
 // Áudio de Fundo
-let musicaFundo = new Audio('./music_fundo.mp3');
+let musicaFundo = new Audio('./sons/music_fundo.mp3');
 musicaFundo.loop = true; 
 musicaFundo.volume = 0.5; // 0.5 é mais seguro, 1.0 pode estourar dependendo do arquivo
 
@@ -133,27 +136,49 @@ function atualizaCenario() {
 }
 
 function main() {
+    // Limpa a tela a cada frame
     des.clearRect(0, 0, canvas.width, canvas.height);
+
     if (jogando) {
+        // Se o jogo começou, desenha tudo do jogo
         desenha();
         atualiza();
         colisao();
         game_over();
         atualizaCenario();
     } else {
-        // Tela de início
-        des.fillStyle = "gold";
-        des.font = "50px JetBrains Mono";
-        des.fillText("PIVA FAIRIES", 420, 300);
-        des.fillStyle = "white";
-        des.font = "20px JetBrains Mono";
-        des.fillText("Pressione ENTER para começar", 440, 350);
+        // TELA DE INÍCIO (MENU)
         
-        // Se for Game Over (vidas zeradas), desenha a fada morta no fundo
+        // Desenha a imagem de fundo preenchendo o canvas todo
+        des.drawImage(imgMenu, 0, 0, canvas.width, canvas.height);
+
+        // Texto por cima da imagem para orientar o jogador
+        des.textAlign = "center";
+        des.fillStyle = "white";
+        des.font = "30px JetBrains Mono";
+        // Efeito de sombra no texto para ler melhor sobre a imagem
+        des.shadowBlur = 10;
+        des.shadowColor = "black";
+        
+        des.fillText("Pressione ENTER para Jogar", canvas.width / 2, 550);
+        
+        // Reseta as sombras para não afetar o resto do jogo
+        des.shadowBlur = 0;
+        des.textAlign = "start";
+
+        // Se for Game Over, mostra o fundo escuro por cima
         if (fada.vida <= 0 || fada2.vida <= 0) {
-            desenha(); 
+            des.fillStyle = "rgba(0,0,0,0.6)";
+            des.fillRect(0, 0, canvas.width, canvas.height);
+            des.fillStyle = "red";
+            des.font = "60px JetBrains Mono";
+            des.textAlign = "center";
+            des.fillText("GAME OVER", canvas.width / 2, canvas.height / 2);
+            des.textAlign = "start";
         }
     }
+    
+    // Mantém o loop funcionando
     requestAnimationFrame(main);
 }
 
