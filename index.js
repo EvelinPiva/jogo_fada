@@ -129,7 +129,7 @@ function atualizaCenario() {
         }
     }
     if (fada.fase == 3 || fada2.fase == 3) {
-        canvas.style.backgroundImage = "url('./img/FUNDO_NOITE.jpg')"
+        canvas.style.backgroundImage = "url('./img/FUNDO_NOITE3.png')"
         if (!abelha1.img.src.includes('/img/insetaoATT.png')) {
             abelha1.img.src = abelha2.img.src = abelha3.img.src = './img/insetaoATT.png'
             abelha1.vel = abelha2.vel = abelha3.vel = 16
@@ -180,8 +180,15 @@ function desenha() {
         des.fillStyle = 'white'
         des.font = '25px Arial'
         des.textAlign = 'center'
-        des.fillText('Fada 1: WASD | Fada 2: SETAS', 600, 300)
-        des.fillText('Pressione ENTER para voltar', 600, 530)
+        des.fillText('Fada Laranja: WASD | Fada Azul: SETAS', canvas.width / 2, 200)
+        des.fillText('O objetivo do jogo é que as duas fadas alcancem 130 pontos!', canvas.width / 2, 300)
+        des.fillText('Caso contrário, GAME OVER', canvas.width / 2,330)
+        des.fillText('São 3 fases para enfrentar', canvas.width / 2,360)
+        des.fillText('Sendo elas: manhã, tarde e noite', canvas.width / 2,390)
+        des.fillText('Durante a manhã as abelhas tentam te aferroar', canvas.width / 2,420)
+        des.fillText('Durante a tarde os pernilongos sobrevoam o céu', canvas.width / 2,450)
+        des.fillText('E à noite, os besouros...', canvas.width / 2,480)
+        des.fillText('Pressione ENTER para voltar', canvas.width / 2,540)
         des.textAlign = 'start'
 
     } else if (estadoJogo === 'desenvolvedora') {
@@ -194,8 +201,11 @@ function desenha() {
         des.fillStyle = 'white'
         des.font = '25px Arial'
         des.textAlign = 'center'
-        des.fillText('Jogo desenvolvido por: Evelin Piva', canvas.width / 2, 320)
-        des.fillText('Projeto de Programação 2026', canvas.width / 2, 370)
+        des.fillText('Jogo desenvolvido por: Evelin Piva', canvas.width / 2, 280)
+        des.fillText('Instagram: @p.evelinn', canvas.width / 2, 310)
+        des.fillText('Email: evelin_piva@estudante.sesisenai.org.br', canvas.width / 2, 340)
+        des.fillText('Professor: Carlos Roberto da Silva Filho', canvas.width / 2, 370)
+        des.fillText('Projeto de Programação 2026', canvas.width / 2, 430)
         des.fillStyle = 'deeppink'
         des.fillText('Pressione ENTER para voltar', canvas.width / 2, 500)
         des.textAlign = 'start'
@@ -228,11 +238,11 @@ function desenha() {
             des.fillStyle = 'white'
             des.font = '30px JetBrains Mono'
             des.fillText('A fada laranja venceu!', canvas.width / 2, 380)
-            des.fillText('Pontuação Final: ' + (fada.pontos + fada2.pontos), canvas.width / 2, 430)
+            des.fillText('Pontuação Final: ' + (fada.pontos + fada2.pontos), canvas.width / 2, 400)
             des.fillText('Pontuação Fada Azul: ' + (fada2.pontos), canvas.width / 2, 430)
-            des.fillText('Pontuação Fada Laranja: ' + (fada.pontos), canvas.width / 2, 430)
+            des.fillText('Pontuação Fada Laranja: ' + (fada.pontos), canvas.width / 2, 460)
             des.font = '20px JetBrains Mono'
-            des.fillText('Pressione F5 para jogar novamente', canvas.width / 2, 550)
+            des.fillText('Pressione F5 para jogar novamente', canvas.width / 2, 650)
             des.textAlign = 'start'
         }else if (estadoJogo === 'vitoria2') {
             des.fillStyle = 'rgba(0, 50, 0, 0.7)'
@@ -241,15 +251,15 @@ function desenha() {
         
                 des.fillStyle = 'gold'
                 des.font = '80px JetBrains Mono'
-                des.fillText('YOU WIN!', canvas.width / 2, 300)
+                des.fillText('YOU WIN!', canvas.width / 2, 240)
                 des.fillStyle = 'white'
                 des.font = '30px JetBrains Mono'
-                des.fillText('A fada azul venceu!', canvas.width / 2, 380)
-                des.fillText('Pontuação Final: ' + (fada.pontos + fada2.pontos), canvas.width / 2, 430)
+                des.fillText('A fada azul venceu!', canvas.width / 2, 290)
+                des.fillText('Pontuação Final: ' + (fada.pontos + fada2.pontos), canvas.width / 2, 320)
                 des.fillText('Pontuação Fada Azul: ' + (fada2.pontos), canvas.width / 2, 430)
-                des.fillText('Pontuação Fada Laranja: ' + (fada.pontos), canvas.width / 2, 730)
+                des.fillText('Pontuação Fada Laranja: ' + (fada.pontos), canvas.width / 2, 400)
                 des.font = '20px JetBrains Mono'
-                des.fillText('Pressione F5 para jogar novamente', canvas.width / 2, 650)
+                des.fillText('Pressione F5 para jogar novamente', canvas.width / 2, 460)
                 des.textAlign = 'start'
             
 
