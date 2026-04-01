@@ -27,10 +27,13 @@ let somPocao = new Audio('./sons/pocao_som.mp3')
 let abelha1 = new Abelha(1300, 100, 50, 50, './img/abelha.png')
 let abelha2 = new Abelha(1500, 300, 50, 50, './img/abelha.png')
 let abelha3 = new Abelha(1700, 500, 50, 50, './img/abelha.png')
+let abelha4 = new Abelha(1700, 500, 50, 50, './img/abelha.png')
 
 // --- ITENS ---
 let pocao = new Pocao(2000, 325, 40, 40, './img/pocao.png')
+
 let coracao = new Coracao(2000, 325, 40, 40, './img/coracao.png')
+
 
 // --- PERSONAGENS ---
 let fada = new Fada(200, 325, 120, 90, './img/fada1.png')
@@ -124,21 +127,21 @@ function atualizaCenario() {
     if (fada.fase == 2 || fada2.fase == 2) {
         canvas.style.backgroundImage = "url('./img/FUNDO_TARDE.png')"
         if (!abelha1.img.src.includes('/img/pernilongo.png')) {
-            abelha1.img.src = abelha2.img.src = abelha3.img.src = './img/pernilongo.png'
-            abelha1.vel = abelha2.vel = abelha3.vel = 12
+            abelha1.img.src = abelha2.img.src = abelha3.img.src = abelha4.img.src = './img/pernilongo.png'
+            abelha1.vel = abelha2.vel = abelha3.vel = abelha4.vel = 12
         }
     }
     if (fada.fase == 3 || fada2.fase == 3) {
         canvas.style.backgroundImage = "url('./img/FUNDO_NOITE3.png')"
         if (!abelha1.img.src.includes('/img/insetaoATT.png')) {
-            abelha1.img.src = abelha2.img.src = abelha3.img.src = './img/insetaoATT.png'
-            abelha1.vel = abelha2.vel = abelha3.vel = 16
+            abelha1.img.src = abelha2.img.src = abelha3.img.src = abelha4.img.src = './img/insetaoATT.png'
+            abelha1.vel = abelha2.vel = abelha3.vel = abelha4.vel = 16
         }
     }
 }
 
 function colisao() {
-    ;[abelha1, abelha2, abelha3].forEach(p => {
+    ;[abelha1, abelha2, abelha3,abelha4].forEach(p => {
         if (fada.colid(p) || fada2.colid(p)) {
             somInseto.currentTime = 0
             somInseto.play().catch(e => console.log('Erro som inseto:', e))
@@ -152,6 +155,7 @@ function colisao() {
         if (fada.colid(coracao)) fada.vida += 1
         if (fada2.colid(coracao)) fada2.vida += 1
         coracao.recomeca()
+       
     }
     if (fada.colid(pocao) || fada2.colid(pocao)) {
         somPocao.currentTime = 0
@@ -159,6 +163,7 @@ function colisao() {
         if (fada.colid(pocao)) fada.pontos += 10
         if (fada2.colid(pocao)) fada2.pontos += 10
         pocao.recomeca()
+       
     }
 }
 
@@ -214,8 +219,11 @@ function desenha() {
         abelha1.desenhar()
         abelha2.desenhar()
         abelha3.desenhar()
+        abelha4.desenhar()
         pocao.desenhar()
+       
         coracao.desenhar()
+        
         fada.desenhar()
         fada2.desenhar()
         des.font = '30px JetBrains Mono'
@@ -223,6 +231,7 @@ function desenha() {
         des.fillText('💖: ' + fada.vida, 40, 50)
         des.fillText('🏅: ' + fada.pontos, 40, 90)
         des.fillText('FASE: ' + fada.fase, 40, 130)
+        console.log(fada.fase)
         des.fillStyle = 'blue'
         des.fillText('💖: ' + fada2.vida, 800, 50)
         des.fillText('🏅: ' + fada2.pontos, 800, 90)
@@ -292,8 +301,11 @@ function atualiza() {
     abelha1.mov_obs()
     abelha2.mov_obs()
     abelha3.mov_obs()
+    abelha4.mov_obs()
     pocao.mov_obs()
+  
     coracao.mov_obs()
+    
     colisao()
     game_over()
     if (fada.pontos === 130) estadoJogo = 'vitoria'
