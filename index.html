@@ -1,21 +1,43 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style.css">
     <link rel="shortcut icon" href="./img/sininho.png" type="image/x-icon">
-    <script src="./models/Fada.js" defer></script>
-    <script src="./index.js" defer></script>
-    <title>Jogo da Fada</title>
+    <link rel="stylesheet" href="inicio.css">
+    <title>Fairy Game</title>
 </head>
-<body>
-    <div id="container-logo">
-        <img src="./img/PivaGames.png" alt="PivaGames Logo" id="logo-img">
-    </div>
-    <canvas id="des" width="1200" height="700">
-        <h2>Seu navegador não suporta gráficos</h2>
-    </canvas>
-</body>
-</html>
 
+<body>
+
+    <img src="./img/PivaGames.png" class="logoPIVA">
+    <div>
+        <a href="./instrucoes.html"><img src="./img/INSTRUCOES_BOTAO.png" alt=""></a>
+        <a href="./game.html"><img src="./img/JOGAR_BOTAO.png" alt=""></a>
+        <a href="./desenvolv.html"><img src="./img/DESENVOLVEDORA_BOTAO.png" alt=""></a>
+    </div>
+
+    <audio id="menuMusic" loop>
+        <source src="./sons/MUSIC_INICIO.mp3" type="audio/mpeg">
+        Seu navegador não suporta o elemento de áudio.
+    </audio>
+
+    <script>
+        const musica = document.getElementById('menuMusic');
+
+        // Função para tocar a música
+        function playMusic() {
+            musica.play().catch(error => {
+                console.log("O navegador bloqueou o autoplay. Aguardando interação...");
+            });
+            // Remove o evento após o primeiro clique para não reiniciar a música toda hora
+            document.removeEventListener('click', playMusic);
+        }
+
+        // Toca a música assim que o usuário clicar em qualquer lugar da página
+        document.addEventListener('click', playMusic);
+    </script>
+</body>
+
+</html>

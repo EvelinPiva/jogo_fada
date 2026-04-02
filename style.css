@@ -26,16 +26,16 @@ background-position: center; */
     background-color: rgb(195, 223, 182);
 }
 
-/* Ajuste da imagem da logo */
+
 #logo-img {
-    height: 400px;
-    /* Ajuste o tamanho da logo aqui */
+    height: 200px;
     width: auto;
 }
 
 #container-logo {
+   
     position: absolute;
-    top: -60px;
+    top: -5px;
     /* Distância do topo da tela - ajuste se precisar subir ou descer */
     left: 50%;
     transform: translateX(-50%);

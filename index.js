@@ -2,7 +2,7 @@ let canvas = document.getElementById('des')
 let des = canvas.getContext('2d')
 
 // --- ESTADO DO JOGO ---
-let estadoJogo = 'menu'
+let estadoJogo = 'jogando'
 let selecaoMenu = 1
 let jogando = false
 
@@ -11,13 +11,9 @@ let imgMenu = new Image()
 imgMenu.src = './img/TELA_INICIAL.png'
 
 // --- ÁUDIOS ---
-let musicaInicio = new Audio('./sons/MUSIC_INICIO.mp3')
-musicaInicio.loop = true
-musicaInicio.volume = 0.5
-
 let musicaFundo = new Audio('./sons/music_fundo.mp3')
 musicaFundo.loop = true
-musicaFundo.volume = 0.5
+musicaFundo.volume = 1
 
 let somInseto = new Audio('./sons/som_inseto.mp3')
 let somCoracao = new Audio('./sons/coracao_som.mp3')
@@ -50,12 +46,12 @@ function teclaPressionada(e) {
     const tecla = e.key
     const t = tecla.toLowerCase()
 
-    if (estadoJogo === 'menu') {
-        tocarMusicaMenu()
-        controleMenu(tecla)
-    } else if (estadoJogo === 'instrucoes' || estadoJogo === 'desenvolvedora') {
-        if (tecla === 'Enter' || tecla === 'Escape') estadoJogo = 'menu'
-    } else if (estadoJogo === 'jogando') {
+    // DESTRAVAR ÁUDIO: Tenta tocar na primeira tecla pressionada
+    if (musicaFundo.paused) {
+        musicaFundo.play().catch(err => console.log("Aguardando interação para áudio..."));
+    }
+
+    if (estadoJogo === 'jogando') {
         controleFada(tecla, t)
     }
 }
@@ -69,21 +65,8 @@ function teclaSolta(e) {
     if (tecla === 'ArrowLeft' || tecla === 'ArrowRight') fada2.dir2 = 0
 }
 
-function tocarMusicaMenu() {
-    if (musicaInicio.paused) {
-        musicaInicio.play().catch(e => console.log('Aguardando interação...'))
-    }
-}
 
-function controleMenu(tecla) {
-    if (tecla === 'ArrowUp') selecaoMenu = (selecaoMenu <= 0) ? 2 : selecaoMenu - 1
-    if (tecla === 'ArrowDown') selecaoMenu = (selecaoMenu >= 2) ? 0 : selecaoMenu + 1
-    if (tecla === 'Enter') {
-        if (selecaoMenu === 1) iniciarJogo()
-        else if (selecaoMenu === 0) estadoJogo = 'instrucoes'
-        else if (selecaoMenu === 2) estadoJogo = 'desenvolvedora'
-    }
-}
+
 
 function controleFada(tecla, t) {
     if (t === 'w') fada.dir = -9
@@ -100,16 +83,13 @@ function controleFada(tecla, t) {
 function iniciarJogo() {
     estadoJogo = 'jogando'
     jogando = true
-    musicaInicio.pause()
-    musicaInicio.currentTime = 0
+    // Resetar o tempo se necessário e dar play
+    musicaFundo.currentTime = 0 
     musicaFundo.play().catch(e => console.log('Erro ao tocar música:', e))
 }
-
 function voltarMenu() {
     estadoJogo = 'menu'
     jogando = false
-    musicaFundo.pause()
-    musicaFundo.currentTime = 0
     musicaInicio.play().catch(e => { })
     fada.vida = 5
     fada2.vida = 5
@@ -177,53 +157,8 @@ function colisao() {
 
 // --- DESENHA ---
 function desenha() {
-    if (estadoJogo === 'menu') {
-        des.drawImage(imgMenu, 0, 0, canvas.width, canvas.height)
-        des.strokeStyle = 'gold'
-        des.lineWidth = 5
-        des.strokeRect(410, 197 + (selecaoMenu * 125), 380, 80)
-
-    } else if (estadoJogo === 'instrucoes') {
-        des.drawImage(imgMenu, 0, 0, canvas.width, canvas.height)
-        des.fillStyle = 'rgba(0,0,0,0.85)'
-        des.fillRect(150, 100, 900, 500)
-        des.strokeStyle = 'gold'
-        des.lineWidth = 5
-        des.strokeRect(150, 100, 900, 500)
-        des.fillStyle = 'white'
-        des.font = '25px Arial'
-        des.textAlign = 'center'
-        des.fillText('Fada Laranja: WASD | Fada Azul: SETAS', canvas.width / 2, 200)
-        des.fillText('O objetivo do jogo é que as duas fadas alcancem 130 pontos!', canvas.width / 2, 300)
-        des.fillText('Caso contrário, GAME OVER', canvas.width / 2,330)
-        des.fillText('São 3 fases para enfrentar', canvas.width / 2,360)
-        des.fillText('Sendo elas: manhã, tarde e noite', canvas.width / 2,390)
-        des.fillText('Durante a manhã as abelhas tentam te aferroar', canvas.width / 2,420)
-        des.fillText('Durante a tarde os pernilongos sobrevoam o céu', canvas.width / 2,450)
-        des.fillText('E à noite, os besouros...', canvas.width / 2,480)
-        des.fillText('Pressione ENTER para voltar', canvas.width / 2,540)
-        des.textAlign = 'start'
-
-    } else if (estadoJogo === 'desenvolvedora') {
-        des.drawImage(imgMenu, 0, 0, canvas.width, canvas.height)
-        des.fillStyle = 'rgba(0,0,0,0.85)'
-        des.fillRect(200, 150, 800, 400)
-        des.strokeStyle = 'deeppink'
-        des.lineWidth = 5
-        des.strokeRect(200, 150, 800, 400)
-        des.fillStyle = 'white'
-        des.font = '25px Arial'
-        des.textAlign = 'center'
-        des.fillText('Jogo desenvolvido por: Evelin Piva', canvas.width / 2, 280)
-        des.fillText('Instagram: @p.evelinn', canvas.width / 2, 310)
-        des.fillText('Email: evelin_piva@estudante.sesisenai.org.br', canvas.width / 2, 340)
-        des.fillText('Professor: Carlos Roberto da Silva Filho', canvas.width / 2, 370)
-        des.fillText('Projeto de Programação 2026', canvas.width / 2, 430)
-        des.fillStyle = 'deeppink'
-        des.fillText('Pressione ENTER para voltar', canvas.width / 2, 500)
-        des.textAlign = 'start'
-
-    } else if (estadoJogo === 'jogando') {
+    
+ if (estadoJogo === 'jogando') {
         abelha1.desenhar()
         abelha2.desenhar()
         abelha3.desenhar()
@@ -277,15 +212,15 @@ function desenha() {
         
                 des.fillStyle = 'gold'
                 des.font = '80px JetBrains Mono'
-                des.fillText('YOU WIN!', canvas.width / 2, 240)
+                des.fillText('YOU WIN!', canvas.width / 2, 300)
                 des.fillStyle = 'white'
                 des.font = '30px JetBrains Mono'
-                des.fillText('A fada azul venceu!', canvas.width / 2, 290)
-                des.fillText('Pontuação Final: ' + (fada.pontos + fada2.pontos), canvas.width / 2, 320)
+                des.fillText('A fada azul venceu!', canvas.width / 2, 380)
+                des.fillText('Pontuação Final: ' + (fada.pontos + fada2.pontos), canvas.width / 2, 400)
                 des.fillText('Pontuação Fada Azul: ' + (fada2.pontos), canvas.width / 2, 430)
-                des.fillText('Pontuação Fada Laranja: ' + (fada.pontos), canvas.width / 2, 400)
+                des.fillText('Pontuação Fada Laranja: ' + (fada.pontos), canvas.width / 2, 460)
                 des.font = '20px JetBrains Mono'
-                des.fillText('Pressione F5 para jogar novamente', canvas.width / 2, 460)
+                des.fillText('Pressione F5 para jogar novamente', canvas.width / 2, 650)
                 des.textAlign = 'start'
             
 
