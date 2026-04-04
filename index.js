@@ -2,18 +2,19 @@ let canvas = document.getElementById('des')
 let des = canvas.getContext('2d')
 
 // --- ESTADO DO JOGO ---
-let estadoJogo = 'menu'
-let menu = false
+let estadoJogo = 'jogando'
+let jogando = false
 
 // --- IMAGENS ---
 let imgMenu = new Image()
 imgMenu.src = './img/TELA_INICIAL.png'
+let fundo = new Image()
+fundo.src = './img/FUNDO_MANHA.jpeg'
 
 // --- ÁUDIOS ---
 let musicaFundo = new Audio('./sons/music_fundo.mp3')
 musicaFundo.loop = true
 musicaFundo.volume = 1
-
 
 let somInseto = new Audio('./sons/som_inseto.mp3')
 let somCoracao = new Audio('./sons/coracao_som.mp3')
@@ -32,15 +33,14 @@ let pocao = new Pocao(2000, 325, 40, 40, './img/pocao.png')
 let coracao = new Coracao(2000, 325, 40, 40, './img/coracao.png')
 let coracao2 = new Coracao(2000, 300, 40, 40, './img/coracao.png')
 
-
 // --- PERSONAGENS ---
 let fada = new Fada(200, 325, 120, 90, './img/fada1.png')
 let fada2 = new Fada2(100, 225, 90, 90, './img/fada2_2.png')
 
+
 // --- EVENTOS ---
 document.addEventListener('keydown', teclaPressionada)
 document.addEventListener('keyup', teclaSolta)
-
 
 // --- FUNÇÕES DE CONTROLE ---
 function teclaPressionada(e) {
@@ -52,7 +52,7 @@ function teclaPressionada(e) {
         musicaFundo.play().catch(err => console.log("Aguardando interação para áudio..."));
     }
 
-    if (estadoJogo === 'menu') {
+    if (estadoJogo === 'jogando') {
         controleFada(tecla, t)
     }
 }
@@ -65,9 +65,6 @@ function teclaSolta(e) {
     if (tecla === 'ArrowUp' || tecla === 'ArrowDown') fada2.dir = 0
     if (tecla === 'ArrowLeft' || tecla === 'ArrowRight') fada2.dir2 = 0
 }
-
-
-
 
 function controleFada(tecla, t) {
     if (t === 'w') fada.dir = -9
@@ -82,24 +79,23 @@ function controleFada(tecla, t) {
 }
 
 function iniciarJogo() {
-    estadoJogo = 'menu'
-    menu = true
+    estadoJogo = 'jogando'
+    jogando = true
     // Resetar o tempo se necessário e dar play
     musicaFundo.currentTime = 0
     musicaFundo.play().catch(e => console.log('Erro ao tocar música:', e))
 }
 
-
 // --- LÓGICA ---
 function game_over() {
     if (fada.vida <= 0 || fada2.vida <= 0) {
-        menu = false
+        jogando = false
         estadoJogo = 'gameover'
         musicaFundo.pause()
         musicaFundo.currentTime = 0
     }
 }
-function atualizarFase() {
+function ver_fase() {
     // FADA 1
     if (fada.pontos >= 90) {
         fada.fase = 3
@@ -121,7 +117,7 @@ function atualizarFase() {
 
 function atualizaCenario() {
     if (fada.fase === 2 || fada2.fase === 2) {
-        canvas.style.backgroundImage = "url('./img/FUNDO_TARDE.png')"
+        fundo.src = './img/FUNDO_TARDE.png'
 
         abelha1.img.src = './img/pernilongo.png'
         abelha2.img.src = './img/pernilongo.png'
@@ -133,7 +129,7 @@ function atualizaCenario() {
     }
 
     if (fada.fase === 3 || fada2.fase === 3) {
-        canvas.style.backgroundImage = "url('./img/FUNDO_NOITE3.png')"
+        fundo.src = './img/FUNDO_NOITE3.png'
 
         abelha1.img.src = './img/insetaoATT.png'
         abelha2.img.src = './img/insetaoATT.png'
@@ -146,42 +142,32 @@ function atualizaCenario() {
 }
 
 function colisao() {
-    ;[abelha1, abelha2, abelha3, abelha4, abelha5].forEach(p => {
-        if (fada.colid(p) || fada2.colid(p)) {
-            somInseto.currentTime = 0
-            somInseto.play().catch(e => console.log('Erro som inseto:', e))
-            if (fada.colid(p)) { p.recomeca(); fada.vida-- }
-            if (fada2.colid(p)) { p.recomeca(); fada2.vida-- }
-        }
-    })
-        ;[coracao, coracao2].forEach(c => {
-            if (fada.colid(c)) {
-                somCoracao.currentTime = 0
-                somCoracao.play().catch(e => console.log('Erro som coracao:', e))
-                fada.vida += 1
-                c.recomeca()
-            }
-            if (fada2.colid(c)) {
-                somCoracao.currentTime = 0
-                somCoracao.play().catch(e => console.log('Erro som coracao:', e))
-                fada2.vida += 1
-                c.recomeca()
-            }
-        })
-    if (fada.colid(pocao) || fada2.colid(pocao)) {
-        somPocao.currentTime = 0
-        somPocao.play().catch(e => console.log('Erro som pocao:', e))
-        if (fada.colid(pocao)) fada.pontos += 10
-        if (fada2.colid(pocao)) fada2.pontos += 10
-        pocao.recomeca()
+    if (fada.colid(abelha1)) { somInseto.play(); abelha1.recomeca(); fada.vida-- }
+    if (fada.colid(abelha2)) { somInseto.play(); abelha2.recomeca(); fada.vida-- }
+    if (fada.colid(abelha3)) { somInseto.play(); abelha3.recomeca(); fada.vida-- }
+    if (fada.colid(abelha4)) { somInseto.play(); abelha4.recomeca(); fada.vida-- }
+    if (fada.colid(abelha5)) { somInseto.play(); abelha5.recomeca(); fada.vida-- }
 
-    }
+    if (fada2.colid(abelha1)) { somInseto.play(); abelha1.recomeca(); fada2.vida-- }
+    if (fada2.colid(abelha2)) { somInseto.play(); abelha2.recomeca(); fada2.vida-- }
+    if (fada2.colid(abelha3)) { somInseto.play(); abelha3.recomeca(); fada2.vida-- }
+    if (fada2.colid(abelha4)) { somInseto.play(); abelha4.recomeca(); fada2.vida-- }
+    if (fada2.colid(abelha5)) { somInseto.play(); abelha5.recomeca(); fada2.vida-- }
 }
+function itens() {
+    if (fada.colid(coracao)) { somCoracao.play(); coracao.recomeca(); fada.vida++ }
+    if (fada.colid(coracao2)) { somCoracao.play(); coracao2.recomeca(); fada.vida++ }
 
+    if (fada2.colid(coracao)) { somCoracao.play(); coracao.recomeca(); fada2.vida++ }
+    if (fada2.colid(coracao2)) { somCoracao.play(); coracao2.recomeca(); fada2.vida++ }
+
+    if (fada.colid(pocao)) { somPocao.play(); pocao.recomeca(); fada.pontos += 10 }
+    if (fada2.colid(pocao)) { somPocao.play(); pocao.recomeca(); fada2.pontos += 10 }
+}
 // --- DESENHA ---
 function desenha() {
-
-    if (estadoJogo === 'menu') {
+    des.drawImage(fundo, 0, 0, canvas.width, canvas.height)
+    if (estadoJogo === 'jogando') {
         abelha1.desenhar()
         abelha2.desenhar()
         abelha3.desenhar()
@@ -196,9 +182,9 @@ function desenha() {
         fada2.desenhar()
         // CAIXA FADA 1
         let y = 30
-        des.fillStyle = "rgba(248, 242, 242, 0.37)"
+        des.fillStyle = "rgb(198, 242, 158)"
         des.fillRect(y - 10, 20, 150, 70)
-
+        des.beginPath()
         des.strokeStyle = "red"
         des.strokeRect(y - 10, 20, 150, 70)
 
@@ -208,13 +194,11 @@ function desenha() {
         des.fillText('★ PONTOS: ' + fada.pontos, y, 65)
         des.fillText('🎮 FASE: ' + fada.fase, y, 85)
 
-
         // CAIXA FADA 2
         let x = 1070
-        des.fillStyle = "rgba(242, 248, 243, 0.37)"
+        des.fillStyle = "rgb(198, 242, 158)"
         des.fillRect(x - 10, 20, 150, 70)
-
-
+        des.beginPath()
         des.strokeStyle = "blue"
         des.strokeRect(x - 10, 20, 150, 70)
 
@@ -223,8 +207,6 @@ function desenha() {
         des.fillText('★ PONTOS: ' + fada2.pontos, x, 65)
         des.fillText('🎮 FASE: ' + fada2.fase, x, 85)
         
-
-
     } else if (estadoJogo === 'vitoria') {
         des.fillStyle = 'rgba(0, 50, 0, 0.7)'
         des.fillRect(0, 0, canvas.width, canvas.height)
@@ -243,6 +225,7 @@ function desenha() {
         des.font = '20px JetBrains Mono'
         des.fillText('Pressione F5 para jogar novamente', canvas.width / 2, 650)
         des.textAlign = 'start'
+
     } else if (estadoJogo === 'vitoria2') {
         des.fillStyle = 'rgba(0, 50, 0, 0.7)'
         des.fillRect(0, 0, canvas.width, canvas.height)
@@ -262,7 +245,6 @@ function desenha() {
         des.font = '20px JetBrains Mono'
         des.fillText('Pressione F5 para jogar novamente', canvas.width / 2, 650)
         des.textAlign = 'start'
-
 
     } else if (estadoJogo === 'gameover') {
         des.fillStyle = 'rgba(0, 0, 0, 0.85)'
@@ -287,34 +269,40 @@ function desenha() {
     }
 
 }
+
 function salvarTempo() {
-    localStorage.setItem('tempoMusica', musica.currentTime);
+    localStorage.setItem('tempoMusica', musicaFundo.currentTime);
+}
+
+function verificarVitoria() {
+    if (fada.pontos === 130) estadoJogo = 'vitoria'
+    if (fada2.pontos === 130) estadoJogo = 'vitoria2'
 }
 
 // --- ATUALIZA ---
 function atualiza() {
-    if (estadoJogo !== 'menu') return
+    if (estadoJogo !== 'jogando') return
+
     fada.mover()
     fada2.mover()
-    atualizaCenario()
     abelha1.mov_obs()
     abelha2.mov_obs()
     abelha3.mov_obs()
     abelha4.mov_obs()
     abelha5.mov_obs()
+
     pocao.mov_obs()
 
     coracao.mov_obs()
     coracao2.mov_obs()
+    atualizaCenario()
 
     colisao()
+    itens()
+    ver_fase()
+    verificarVitoria()
     game_over()
-    atualizarFase()
-    atualizaCenario()
-    if (fada.pontos === 130) estadoJogo = 'vitoria'
-    if (fada2.pontos === 130) estadoJogo = 'vitoria2'
 }
-
 
 // --- LOOP PRINCIPAL ---
 function main() {

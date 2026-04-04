@@ -18,8 +18,7 @@ body {
 
 canvas {
     border: 1px solid #333;
-    background-image: url('./img/FUNDO_MANHA.jpeg');
-    background-size: 100% 100%;
+
     /* background-repeat: no-repeat;
 background-position: center; */
 
@@ -42,4 +41,11 @@ background-position: center; */
     /* Centraliza perfeitamente na horizontal */
     z-index: 10;
     /* Garante que fique na frente de tudo */
+}
+.botao-voltar {
+    position: absolute;
+    top: 40px;
+    left: 50px;
+    color: #1b6416;
+    font-size: 24px; 
 }
