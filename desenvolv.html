@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./img/sininho.png" type="image/x-icon">
+    <link rel="stylesheet" href="desenv.css">
+    <title>Fairy Game</title>
+</head>
+<button class="botao-voltar" onclick="window.location.href='index.html'">
+    Voltar
+</button>
+<div class="container">
+
+
+    <img src="./img/fotominha.png" class="evelin">
+
+
+    <div class="texto">
+        <h1>Sobre mim</h1>
+
+        <p>Nome: Evelin Piva</p>
+        <br>
+        <p>Instagram: @p.evelinn</p>
+        <p>Email: evelin_piva@estudante.sesisenai.org.br</p>
+        <p>Professor: Carlos Roberto da Silva Filho</p>
+        <p>3º ano e.m. curso técnico desenvolvimento de sistemas</p>
+    </div>
+
+
+    <img src="./img/fotominha2.png" class="evelin2">
+
+</div>
+<audio id="menuMusic" loop>
+    <source src="./sons/MUSIC_INICIO.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+    const musica = document.getElementById('menuMusic')
+
+    window.addEventListener('load', () => {
+        let tempo = localStorage.getItem('tempoMusica')
+
+        if (tempo) {
+            musica.currentTime = tempo
+        }
+
+        musica.play().catch(() => { })
+    })
+
+    // salva o tempo ao sair
+    window.addEventListener('beforeunload', () => {
+        localStorage.setItem('tempoMusica', musica.currentTime)
+    })
+</script>
+
+</body>
+
+</html>

@@ -12,10 +12,13 @@
 <body>
 
     <img src="./img/PivaGames.png" class="logoPIVA">
+    <canvas id="des" width="900" height="5">
+        <h2>Seu navegador não suporta gráficos</h2>
+    </canvas>
     <div>
-        <a href="./instrucoes.html"><img src="./img/INSTRUCOES_BOTAO.png" alt=""></a>
+        <a href="./instrucoes.html" onclick="salvarTempo()"><img src="./img/INSTRUCOES_BOTAO.png" alt=""></a>
         <a href="./game.html"><img src="./img/JOGAR_BOTAO.png" alt=""></a>
-        <a href="./desenvolv.html"><img src="./img/DESENVOLVEDORA_BOTAO.png" alt=""></a>
+        <a href="./desenvolv.html" onclick="salvarTempo()"><img src="./img/DESENVOLVEDORA_BOTAO.png" alt=""></a>
     </div>
 
     <audio id="menuMusic" loop>
@@ -24,19 +27,37 @@
     </audio>
 
     <script>
-        const musica = document.getElementById('menuMusic');
+        const musica = document.getElementById('menuMusic')
 
-        // Função para tocar a música
+        // tocar música ao clicar (primeira vez)
         function playMusic() {
-            musica.play().catch(error => {
-                console.log("O navegador bloqueou o autoplay. Aguardando interação...");
-            });
-            // Remove o evento após o primeiro clique para não reiniciar a música toda hora
-            document.removeEventListener('click', playMusic);
+            musica.play().catch(() => { })
+            localStorage.setItem('clicou', 'true') // salva que já clicou
+            document.removeEventListener('click', playMusic)
         }
 
-        // Toca a música assim que o usuário clicar em qualquer lugar da página
-        document.addEventListener('click', playMusic);
+        // salvar tempo ao sair
+        function salvarTempo() {
+            localStorage.setItem('tempoMusica', musica.currentTime)
+        }
+
+        // quando abrir a página
+        window.addEventListener('load', () => {
+            let tempo = localStorage.getItem('tempoMusica')
+            let clicou = localStorage.getItem('clicou')
+
+            if (tempo) {
+                musica.currentTime = tempo
+            }
+
+            // tenta tocar automaticamente se já clicou antes
+            if (clicou) {
+                musica.play().catch(() => { })
+            }
+        })
+
+        // evento de clique inicial
+        document.addEventListener('click', playMusic)
     </script>
 </body>
 

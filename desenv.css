@@ -1,0 +1,64 @@
+* {
+    margin: 0;
+    padding: 0;
+
+}
+
+body {
+    height: 100vh;
+    background: linear-gradient(180deg, #e8e8e8, #72135b);
+    display: flex;
+    align-items: center;
+    padding-left: 130px;
+    /* dá um respiro da borda */
+}
+
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.texto {
+    text-align: center;
+
+}
+
+
+h1 {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 80px;
+    color: #187919;
+    margin-bottom: 20px;
+}
+
+
+p {
+    font-size: 20px;
+    text-align: center;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: #000000;
+}
+
+
+.botao-voltar {
+    position: absolute;
+    top: 40px;
+    left: 50px;
+    color: #1b6416;
+}
+
+
+.evelin {
+    width: 300px;
+    height: auto;
+}
+
+.evelin2 {
+    width: 220px;
+    height: auto;
+}

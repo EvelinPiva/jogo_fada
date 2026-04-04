@@ -1,12 +1,75 @@
-*{
-    margin:0;
-    padding:0
+* {
+    margin: 0;
+    padding: 0
 }
-h1{
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-size: 100px;
-   
+
+body {
+    height: 63vh;
+    background: linear-gradient(180deg, #d7f0c8, #487524);
+    padding: 135px;
 }
-p{
+
+/* TÍTULO */
+h1 {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 80px;
+    text-align: center;
+    color: #ce4529;
+    padding: 10px;
+
+}
+
+.conteudo {
+    text-align: center;
+}
+
+p {
+    font-size: 20px;
+    text-align: center;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: #000000;
+
+}
+
+div p {
+    font-size: 20px;
+    text-align: center;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: #000000;
+
+}
+
+ul {
+    font-size: 20px;
+    text-align: center;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: #132c9b;
+}
+
+li {
+    font-size: 20px;
+    text-align: center;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: #952c06;
+    list-style: none;
+    /* pra tirar a bolinha */
+}
+
+.botao-voltar {
+    position: absolute;
+    top: 40px;
+    left: 50px;
+    color: #1b6416;
+}
+
+.fada {
+    width: 130px;
+    height: 120px;
+
+}
+
+.fada2 {
+    width: 110px;
+    height: 110px;
 
 }

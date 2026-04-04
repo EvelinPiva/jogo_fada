@@ -8,12 +8,21 @@
     <link rel="stylesheet" href="instrucoes.css">
     <title>Fairy Game</title>
 </head>
-
+<button class="botao-voltar" onclick="window.location.href='index.html'">
+    Voltar
+</button>
+<div class="conteudo">
 
    <h1>Instruções</h1>
+   
+   <img src="./img/fada1.png" class="fada">
+   <img src="./img/fada2_2.png" class="fada2">
+  
+    <li>Fada Laranja: WASD</li>
+   
 
-    <p>Fada Laranja: WASD</p>
-    <p>Fada Azul: SETAS</p>
+    <ul>Fada Azul: SETAS</ul>
+    
 
     <br>
     <br>
@@ -25,4 +34,27 @@
     <br>
 
     <p>Bom jogo!</p>
+    <audio id="menuMusic" loop>
+    <source src="./sons/MUSIC_INICIO.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+const musica = document.getElementById('menuMusic')
+
+window.addEventListener('load', () => {
+    let tempo = localStorage.getItem('tempoMusica')
+
+    if (tempo) {
+        musica.currentTime = tempo
+    }
+
+    musica.play().catch(() => {})
+})
+
+// salva o tempo ao sair
+window.addEventListener('beforeunload', () => {
+    localStorage.setItem('tempoMusica', musica.currentTime)
+})
+</script>
+
 </div>
