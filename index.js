@@ -78,14 +78,6 @@ function controleFada(tecla, t) {
 
 }
 
-function iniciarJogo() {
-    estadoJogo = 'jogando'
-    jogando = true
-    // Resetar o tempo se necessário e dar play
-    musicaFundo.currentTime = 0
-    musicaFundo.play().catch(e => console.log('Erro ao tocar música:', e))
-}
-
 // --- LÓGICA ---
 function game_over() {
     if (fada.vida <= 0 || fada2.vida <= 0) {
@@ -142,6 +134,8 @@ function atualizaCenario() {
 }
 
 function colisao() {
+
+    // --- ABELHAS (DANO) ---
     if (fada.colid(abelha1)) { somInseto.play(); abelha1.recomeca(); fada.vida-- }
     if (fada.colid(abelha2)) { somInseto.play(); abelha2.recomeca(); fada.vida-- }
     if (fada.colid(abelha3)) { somInseto.play(); abelha3.recomeca(); fada.vida-- }
@@ -153,14 +147,15 @@ function colisao() {
     if (fada2.colid(abelha3)) { somInseto.play(); abelha3.recomeca(); fada2.vida-- }
     if (fada2.colid(abelha4)) { somInseto.play(); abelha4.recomeca(); fada2.vida-- }
     if (fada2.colid(abelha5)) { somInseto.play(); abelha5.recomeca(); fada2.vida-- }
-}
-function itens() {
+
+    // --- CORAÇÕES (VIDA) ---
     if (fada.colid(coracao)) { somCoracao.play(); coracao.recomeca(); fada.vida++ }
     if (fada.colid(coracao2)) { somCoracao.play(); coracao2.recomeca(); fada.vida++ }
 
     if (fada2.colid(coracao)) { somCoracao.play(); coracao.recomeca(); fada2.vida++ }
     if (fada2.colid(coracao2)) { somCoracao.play(); coracao2.recomeca(); fada2.vida++ }
 
+    // --- POÇÃO (PONTOS) ---
     if (fada.colid(pocao)) { somPocao.play(); pocao.recomeca(); fada.pontos += 10 }
     if (fada2.colid(pocao)) { somPocao.play(); pocao.recomeca(); fada2.pontos += 10 }
 }
@@ -298,7 +293,6 @@ function atualiza() {
     atualizaCenario()
 
     colisao()
-    itens()
     ver_fase()
     verificarVitoria()
     game_over()
