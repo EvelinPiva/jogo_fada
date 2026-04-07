@@ -1,71 +1,115 @@
+/* Importação da fonte pixelada */
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
 * {
     margin: 0;
     padding: 0;
-
+    box-sizing: border-box;
+    /* Remove suavização para manter o aspecto de pixel */
+    image-rendering: pixelated;
+    -webkit-font-smoothing: none;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-    height: 100vh;
+    min-height: 100vh;
     background: linear-gradient(180deg, #e8e8e8, #916a37);
     display: flex;
     align-items: center;
-    padding-left: 130px;
-    /* dá um respiro da borda */
+    justify-content: center;
+    font-family: 'VT323', monospace;
 }
-
 
 .container {
     width: 100%;
     max-width: 1200px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center; /* Centraliza o conjunto */
+    gap: 20px; /* Espaço entre imagens e tabela */
 }
 
-
+/* --- A TABELA / CAIXA CENTRAL --- */
 .texto {
+    background-color: #ffffff; /* Branco sólido para contraste total */
+    border: 6px solid #000000; /* Borda preta bem grossa (pixel art style) */
+    padding: 30px;
+    width: 500px; /* Largura fixa para não ficar pequena */
+    min-width: 300px;
+    box-shadow: 12px 12px 0px rgba(0, 0, 0, 0.3); /* Sombra de bloco sólida */
     text-align: center;
-
 }
-
 
 h1 {
-    font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: 80px;
-    color: #187919;
+    color: #187919; /* Verde vibrante */
     margin-bottom: 20px;
+    line-height: 0.8;
 }
-div ul{
-    font-size: 25px;
-    text-align: center;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    background-color: #c5580f;
-    
+
+/* Faixa Laranja interna */
+div ul {
+    background-color: #c5580f; /* Laranja forte */
+    color: #ffffff;
+    font-size: 32px;
+    padding: 10px;
+    border: 4px solid #000000;
+    margin-bottom: 25px;
+    list-style: none;
+    display: block; /* Garante que ocupe a largura da caixa */
 }
 
 p {
-    font-size: 20px;
-    text-align: center;
-    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 26px;
     color: #000000;
+    margin-bottom: 10px;
+    line-height: 1.0;
 }
 
-
-.botao-voltar {
-    position: absolute;
-    top: 40px;
-    left: 50px;
-    color: #1b6416;
-    font-size: 24px; 
-}
-
-
+/* --- AS IMAGENS LATERAIS (REDUZIDAS) --- */
 .evelin {
-    width: 300px;
+    width: 280px; /* Reduzi para não dominar a tela */
     height: auto;
+    filter: drop-shadow(8px 8px 0px rgba(0,0,0,0.2));
 }
 
 .evelin2 {
-    width: 240px;
+    width: 230px; /* Reduzi um pouco mais a segunda para equilíbrio */
     height: auto;
+    filter: drop-shadow(-8px 8px 0px rgba(0,0,0,0.2));
+}
+
+/* --- BOTÃO VOLTAR --- */
+.botao-voltar {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background-color: #1b6416;
+    color: #ffffff;
+    padding: 8px 20px;
+    text-decoration: none;
+    font-size: 26px;
+    border: 3px solid #000000;
+    box-shadow: 5px 5px 0px #000000;
+}
+
+.botao-voltar:hover {
+    background-color: #ce4529;
+    transform: translate(-2px, -2px);
+    box-shadow: 7px 7px 0px #000000;
+}
+
+/* Ajuste para telas menores */
+@media (max-width: 1100px) {
+    .container {
+        flex-direction: column;
+        padding: 40px 0;
+    }
+    .texto {
+        width: 50%;
+        min-width: auto;
+    }
+    .evelin, .evelin2 {
+        width: 280px;
+    }
 }

@@ -1,76 +1,134 @@
+/* Importação da fonte pixelada */
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
 * {
     margin: 0;
-    padding: 0
+    padding: 0;
+    box-sizing: border-box;
+    image-rendering: pixelated;
+    -webkit-font-smoothing: none;
 }
 
 body {
-    height: 63vh;
+    min-height: 100vh;
     background: linear-gradient(180deg, #f5f6f4, #78abce);
-    padding: 135px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'VT323', monospace;
+    padding: 20px;
+}
+
+/* CAIXA DE INSTRUÇÕES COLORIDA */
+.conteudo {
+    /* Fundo com um leve tom esverdeado para o tema de floresta */
+    background: linear-gradient(135deg, #eef9ee, #ffffff); 
+    
+    /* Borda Dupla Estilo RPG Clássico */
+    border: 6px double #1b6416; 
+    outline: 4px solid #000000;
+    
+    padding: 40px;
+    width: 100%;
+    max-width: 850px;
+    text-align: center;
+    
+    /* Sombra sólida verde para dar profundidade */
+    box-shadow: 12px 12px 0px rgba(27, 100, 22, 0.4);
+    position: relative;
 }
 
 /* TÍTULO */
 h1 {
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    font-size: 80px;
-    text-align: center;
-    color: #ce4529;
-    padding: 10px;
-
+    font-size: 100px;
+    color: #ce4529; /* Laranja avermelhado */
+    text-shadow: 4px 4px 0px #000000; /* Sombra preta no título para destacar */
+    margin-bottom: 20px;
+    line-height: 0.8;
 }
 
-.conteudo {
-    text-align: center;
-}
-
-p {
-    font-size: 20px;
-    text-align: center;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    color: #000000;
-
-}
-
-div p {
-    font-size: 20px;
-    text-align: center;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    color: #000000;
-
-}
-
-ul {
-    font-size: 20px;
-    text-align: center;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    color: #132c9b;
-}
-
-li {
-    font-size: 20px;
-    text-align: center;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    color: #952c06;
-    list-style: none;
-    /* pra tirar a bolinha */
-}
-
-.botao-voltar {
-    position: absolute;
-    top: 40px;
-    left: 50px;
-    color: #1b6416;
-    font-size: 24px; 
+/* CONTAINER DAS FADAS */
+.imagens-fadas {
+    background: rgba(255, 255, 255, 0.6);
+    border: 2px dashed #1b6416;
+    padding: 15px;
+    display: inline-block;
+    margin-bottom: 25px;
 }
 
 .fada {
-    width: 130px;
-    height: 120px;
-
+    width: 125px;
+    height: auto;
 }
 
 .fada2 {
-    width: 110px;
-    height: 110px;
+    width: 115px;
+    height: auto;
+}
 
+/* CONTROLES (TEXTO PRETO COM FUNDO COLORIDO) */
+li {
+    font-size: 34px;
+    color: #000000; /* LETRA PRETA */
+    background-color: #ffcc80; /* Fundo laranja da fada */
+    display: inline-block;
+    padding: 2px 15px;
+    border: 3px solid #000000;
+    margin: 5px;
+}
+
+ul {
+    font-size: 34px;
+    color: #000000; /* LETRA PRETA */
+    background-color: #90caf9; /* Fundo azul da fada */
+    display: inline-block;
+    padding: 2px 15px;
+    border: 3px solid #000000;
+    margin-bottom: 30px;
+    list-style: none;
+}
+
+/* REGRAS DO JOGO (TEXTO PRETO PURO) */
+p, div p {
+    font-size: 28px;
+    color: #000000; /* LETRA PRETA */
+    margin-bottom: 12px;
+    line-height: 1.1;
+    font-weight: bold;
+}
+
+/* "BOM JOGO" EM DESTAQUE */
+p:last-child {
+    margin-top: 20px;
+    font-size: 45px;
+    color: #ce4529;
+    text-shadow: 2px 2px 0px #000000;
+}
+
+/* BOTÃO VOLTAR */
+.botao-voltar {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background-color: #1b6416;
+    color: #ffffff;
+    padding: 8px 20px;
+    text-decoration: none;
+    font-size: 26px;
+    border: 3px solid #000000;
+    box-shadow: 5px 5px 0px #000000;
+}
+
+.botao-voltar:hover {
+    background-color: #ce4529;
+    transform: translate(-2px, -2px);
+    box-shadow: 7px 7px 0px #000000;
+}
+
+/* Responsividade */
+@media (max-width: 800px) {
+    h1 { font-size: 65px; }
+    .conteudo { padding: 20px; width: 95%; }
+    li, ul { font-size: 26px; }
+    p, div p { font-size: 22px; }
 }
