@@ -17,7 +17,7 @@
     </canvas>
     <div>
         <a href="./instrucoes.html" onclick="salvarTempo()"><img src="./img/INSTRUCOES_BOTAO.png" alt=""></a>
-        <a href="./game.html"><img src="./img/JOGAR_BOTAO.png" alt=""></a>
+        <a href="./game.html" onclick="salvarTempo()"><img src="./img/JOGAR_BOTAO.png" alt=""></a>
         <a href="./desenvolv.html" onclick="salvarTempo()"><img src="./img/DESENVOLVEDORA_BOTAO.png" alt=""></a>
     </div>
 
@@ -32,7 +32,7 @@
         // tocar música ao clicar (primeira vez)
         function playMusic() {
             musica.play().catch(() => { })
-            localStorage.setItem('clicou', 'true') // salva que já clicou
+            localStorage.setItem('clicou', 'true')
             document.removeEventListener('click', playMusic)
         }
 
@@ -50,7 +50,6 @@
                 musica.currentTime = tempo
             }
 
-            // tenta tocar automaticamente se já clicou antes
             if (clicou) {
                 musica.play().catch(() => { })
             }

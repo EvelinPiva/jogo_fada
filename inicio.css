@@ -6,35 +6,29 @@
 body {
     background-image: url(./img/FUNDO_INICIO3.jpg);
     background-size: cover;
-
-    /* Centraliza a imagem para que o corte seja uniforme nos lados */
     background-position: center;
-
-    /* Impede que a imagem se repita caso a tela seja muito grande */
     background-repeat: no-repeat;
-
-    /* Fixa o fundo para que ele não role com o conteúdo (opcional) */
     background-attachment: fixed;
-
-    /* Garante que o corpo tenha pelo menos a altura da tela inteira */
     min-height: 100vh;
     margin: 0;
-
 }
 
 div {
     display: flex;
     flex-direction: column;
-    /* deixa um embaixo do outro */
     gap: 15px;
-    /* espaço entre os botões */
     align-items: center;
 }
 
 div img {
     width: 360px;
-    /* diminui o tamanho */
     cursor: pointer;
+    transition: transform 0.15s ease, filter 0.15s ease;
+}
+
+div img:hover {
+    transform: scale(1.06);
+    filter: brightness(1.1);
 }
 
 .logoPIVA {
