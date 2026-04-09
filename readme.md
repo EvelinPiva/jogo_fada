@@ -1,177 +1,183 @@
-🧚 Fairy Game
+# 🧚 Fairy Game
+
 ![Banner](./img/TELA_INICIAL.png)
-1. Identificação do Projeto
 
-Título: Fairy Game
-Desenvolvedor: Evelin Piva
-Professor Orientador: Professor Carlos Roberto da Silva Filho
-Instituição: Sesi Senai
-Curso: Técnico em Desenvolvimento de Sistemas
+> Jogo 2D desenvolvido em JavaScript com Canvas API — aventura mágica para 1 ou 2 jogadores!
 
-2. Visão Geral do Sistema
-Descrição
+---
 
-O jogo Fairy Game é uma experiência 2D multiplayer local desenvolvida em JavaScript utilizando a Canvas API.
+## 📋 Identificação do Projeto
 
-O objetivo principal é controlar duas fadas simultaneamente, coletando itens e desviando de obstáculos enquanto competem em pontuação.
+| Campo | Informação |
+|---|---|
+| Título | Fairy Game |
+| Desenvolvedora | Evelin Piva |
+| Professor Orientador | Carlos Roberto da Silva Filho |
+| Instituição | Sesi Senai |
+| Curso | Técnico em Desenvolvimento de Sistemas |
 
-Personagens
-🟠 Fada Laranja (WASD)
-🔵 Fada Azul (Setas)
-Elementos do jogo
+---
 
-Durante o jogo, surgem:
+## 🎮 Visão Geral
 
-Obstáculos (insetos)
+O **Fairy Game** é um jogo 2D com suporte a **modo solo** e **modo multiplayer local**, desenvolvido com JavaScript puro e Canvas API. O jogador controla fadas mágicas, coleta itens e desvia de obstáculos enquanto avança por fases progressivas.
 
-Itens coletáveis (corações e poções)
+### Modos de Jogo
 
-Mudança de cenário conforme a fase
+| Modo | Descrição |
+|---|---|
+| 🧚 1 Fada | Modo solo — um jogador controla a Fada Laranja |
+| 🧚🧚 2 Fadas | Modo multiplayer local — dois jogadores simultâneos |
 
-3. Objetivo
+> A seleção de modo é feita na tela inicial, com os botões **"1 Fada"** e **"2 Fadas"** espaçados para facilitar a escolha.
 
-Sobreviver, coletar itens e alcançar a maior pontuação.
+### Personagens
 
-🏆 Vence o jogador que atingir 130 pontos primeiro.
+- 🟠 **Fada Laranja** — controlada com `W A S D`
+- 🔵 **Fada Azul** — controlada com as teclas de seta `↑ ↓ ← →` *(disponível no modo 2 Fadas)*
 
-4. Requisitos Funcionais
+---
 
-ID	Requisito	Descrição
+## 🎯 Objetivo
 
-RF01	Movimento	Cada fada possui controle independente
+Sobreviver, coletar itens e alcançar a maior pontuação possível.
 
-RF02	Sistema de Vidas	Perda de vida ao colidir com insetos
+🏆 **Vence o jogador que atingir 130 pontos primeiro.**
 
-RF03	Pontuação	Sistema de pontos em tempo real
+---
 
-RF04	Coletáveis	Corações recuperam vida e poções somam pontos
+## 🕹️ Controles
 
-RF05	Colisão	Sistema de colisão entre objetos
+| Jogador | Teclas | Ação |
+|---|---|---|
+| 🟠 Fada Laranja | `W` `A` `S` `D` | Movimentação |
+| 🔵 Fada Azul | `↑` `↓` `←` `→` | Movimentação *(modo 2 Fadas)* |
 
-RF06	Progressão de Fases	Mudança de fase por pontuação
+---
 
-RF07	Multijogador	Dois jogadores simultâneos
+## ⚙️ Mecânicas do Jogo
 
-RF08	Interface	Menu, Jogo, Vitória e Game Over
+### 🐝 Obstáculos
 
-RF09	Áudio	Música e efeitos sonoros dinâmicos
+- **Insetos** — causam perda de vida ao colidir com a fada
 
+### 💖 Itens Coletáveis
 
-5. Requisitos Não Funcionais
+- **Corações** → +1 vida
+- **Poções** → +10 pontos
 
-ID	Requisito	Descrição
+---
 
-RNF01	Tecnologia	JavaScript ES6, HTML5 e Canvas
+## 📈 Progressão de Fases
 
-RNF02	Performance	Atualização via requestAnimationFrame
+| Fase | Pontuação | Cenário | Dificuldade |
+|---|---|---|---|
+| Fase 1 | 0 – 39 pts | Inicial | Normal |
+| Fase 2 | 40 – 89 pts | Tarde | Média |
+| Fase 3 | 90 – 130 pts | Noite | Difícil |
 
-RNF03	Portabilidade	Executa diretamente no navegador
+---
 
-RNF04	Usabilidade	Interface simples e responsiva
+## 📜 Requisitos Funcionais
 
-RNF05	Áudio	Controle de música com persistência
+| ID | Requisito | Descrição |
+|---|---|---|
+| RF01 | Movimento | Cada fada possui controle independente |
+| RF02 | Sistema de Vidas | Perda de vida ao colidir com insetos |
+| RF03 | Pontuação | Sistema de pontos em tempo real |
+| RF04 | Coletáveis | Corações recuperam vida; poções somam pontos |
+| RF05 | Colisão | Sistema de colisão entre objetos |
+| RF06 | Progressão de Fases | Mudança de fase por pontuação |
+| RF07 | Modos de Jogo | Solo (1 Fada) e Multiplayer Local (2 Fadas) |
+| RF08 | Interface | Menu, Seleção de Modo, Jogo, Vitória e Game Over |
+| RF09 | Áudio | Música e efeitos sonoros dinâmicos |
 
-RNF06	Experiência	Feedback visual e sonoro
+---
 
-6. Regras de Negócio
+## 🔧 Requisitos Não Funcionais
 
-ID	Regra
-RN01	Insetos causam perda de vida
+| ID | Requisito | Descrição |
+|---|---|---|
+| RNF01 | Tecnologia | JavaScript ES6, HTML5 e Canvas API |
+| RNF02 | Performance | Atualização via `requestAnimationFrame` |
+| RNF03 | Portabilidade | Executa diretamente no navegador, sem instalação |
+| RNF04 | Usabilidade | Interface simples, responsiva e acessível |
+| RNF05 | Áudio | Controle de música com persistência via `localStorage` |
+| RNF06 | Experiência | Feedback visual e sonoro em tempo real |
 
-RN02	Corações aumentam a vida
+---
 
-RN03	Poções aumentam a pontuação
+## 📏 Regras de Negócio
 
-RN04	Fase 1: até 40 pontos
+| ID | Regra |
+|---|---|
+| RN01 | Insetos causam perda de vida ao colidir com a fada |
+| RN02 | Corações aumentam a vida da fada |
+| RN03 | Poções aumentam a pontuação da fada |
+| RN04 | Fase 1: pontuação de 0 até 39 |
+| RN05 | Fase 2: pontuação de 40 até 89 |
+| RN06 | Fase 3: pontuação de 90 até 130 |
+| RN07 | Vence quem atingir 130 pontos primeiro |
+| RN08 | Se uma fada perder todas as vidas, o jogo termina para ambos |
 
-RN05	Fase 2: até 90 pontos
+---
 
-RN06	Fase 3: até 130 pontos
+## 🔊 Sistema de Áudio
 
-RN07	Vence quem atingir 130 pontos primeiro
+- Música de fundo com loop automático
+- Sons para:
+  - Colisão com insetos
+  - Coleta de coração
+  - Coleta de poção
+- Tempo da música persiste entre telas via `localStorage`
 
-RN08	RN08 Se uma fada perder todas as vidas, o jogo termina para ambos
+---
 
-7. Controles
+## 🖥️ Interface do Jogo
 
-Jogador	Teclas	Ação
+| Tela | Descrição |
+|---|---|
+| 🎮 Menu Inicial | Tela de entrada do jogo |
+| 🧚 Seleção de Modo | Escolha entre **1 Fada** ou **2 Fadas** |
+| 📜 Instruções | Guia de controles e regras |
+| 👩‍💻 Desenvolvedor | Informações sobre a criadora |
+| 🏆 Vitória | Tela de vencedor |
+| 💀 Game Over | Tela de fim de jogo |
 
-🟠 Fada Laranja	W, A, S, D	Movimentação
+---
 
-🔵 Fada Azul	↑ ↓ ← →	Movimentação
+## 🧠 Lógica Técnica
 
-8. Mecânicas do Jogo
+- Renderização via `<canvas>` HTML5
+- Classes para cada objeto do jogo (`Fada`, `Abelha`, etc.)
+- Loop principal com `requestAnimationFrame`
+- Sistema de estados:
+  - `menu`
+  - `jogando`
+  - `gameover`
+  - `vitoria_jogador1`
+  - `vitoria_jogador2`
+- Colisão em tempo real entre todos os objetos
+- Gerenciamento de múltiplos objetos simultâneos (insetos e itens)
 
-🐝 Obstáculos
+---
 
-Insetos- Causam perda de vida
-💖 Itens
-Corações → +1 vida
-Poções → +10 pontos
+## 📁 Estrutura do Projeto
 
-9. Progressão de Fases
+## 🚀 Como Executar
 
-Fase	Pontuação	Cenário	Dificuldade
-Fase 1	0+	Inicial	Normal
-Fase 2	40+	Tarde	Média
-Fase 3	90+	Noite	Difícil
+1. Clone ou baixe o projeto
+2. Abra o arquivo `inicio.html` no navegador
 
-10. Sistema de Áudio
+Ou use a extensão **Live Server** no VS Code para rodar com hot reload.
 
-Música de fundo com loop automático
-Sons para:
+---
 
-Colisão com insetos
-Coleta de coração
-Coleta de poção
+## 👩‍💻 Créditos
 
-11. Interface do Jogo
-
-O jogo contém:
-
-🎮 Menu inicial
-📜 Instruções
-👩‍💻 Tela do desenvolvedor
-🏆 Tela de vitória
-💀 Tela de Game Over
-12. Lógica Técnica
-
-O jogo utiliza:
-
-canvas para renderização
-Classes para objetos (Fada, Abelha, etc.)
-Loop principal com requestAnimationFrame
-Sistema de estados:
-
-menu
-jogando
-gameover
-vitoria_jogador1
-vitoria_jogador2
-
-Sistema de colisão em tempo real  
-Gerenciamento de múltiplos objetos simultâneos (insetos e itens)
-
-13. Estrutura do Projeto
-/img         → imagens do jogo  
-/sons        → áudios  
-/index.html  → página principal  
-/game.js     → lógica do jogo  
-/inicio.html → menu  
-/desenv.html → página do desenvolvedor  
-
-14. Execução do Projeto
-📥 Abrir o projeto
-
-Abra o arquivo:
-
-index.html
-
-Ou utilize a extensão Live Server no VS Code.
-
-15. Créditos
-
-Desenvolvedora: Evelin Piva
-Instagram: @p.evelinn
-Instituição: Sesi Senai
-Professor: Carlos Roberto da Silva Filho
+| Campo | Info |
+|---|---|
+| Desenvolvedora | Evelin Piva |
+| Instagram | [@p.evelinn](https://instagram.com/p.evelinn) |
+| Instituição | Sesi Senai |
+| Professor | Carlos Roberto da Silva Filho |

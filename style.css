@@ -57,7 +57,7 @@ canvas {
 }
 
 #btn-1fada {
-    top: 52%;
+    top: 32%;
     left: 50%;
     transform: translateX(-50%);
 }
@@ -67,7 +67,7 @@ canvas {
 }
 
 #btn-2fadas {
-    top: 63%;
+    top: 50%; /* era 63% */
     left: 50%;
     transform: translateX(-50%);
 }
